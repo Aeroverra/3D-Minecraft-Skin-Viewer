@@ -113,8 +113,10 @@ body {
 <body>
 <canvas id="canvas" width="64" height="64"></canvas>
 <div id="sidebar">
-	<strong>Username</strong>
-	<input id="username" type="text" value="earthiverse">
+	<strong>UUID</strong>
+	<input id="uuid" type="text" value="e54ac0f7be724c118ad59d70ee7b8b97">
+	<strong>Speed</strong>
+	<input id="speed" type="text" value="320">
 
 	<strong>Toggle Visibility - Body Parts</strong>
 	<label><input id="headToggle" type="checkbox" checked>Head</label>
@@ -146,6 +148,7 @@ body {
 	
 	var radius = 32;
 	var alpha = 0;
+	var speed = 320;
 	
 	var sidebarWidth = 250;
 
@@ -202,7 +205,7 @@ body {
 	
 	// I use crafatar because it allows CORS requests.
 	// Minotar stopped working.
-	img.src = 'http://crafatar.com/skins/earthiverse';
+	img.src = 'http://crafatar.com/skins/e54ac0f7be724c118ad59d70ee7b8b97';
 	
 	function RenderSkin() {
 		// Head Parts
@@ -907,7 +910,7 @@ body {
 		camera.rotation.y = alpha;
 		
 		//alpha = /*(Math.PI / 2)*/ + (Math.PI / 16);
-		alpha += Math.PI / 320;
+		alpha += Math.PI / speed;
 		camera.position.z = radius*Math.cos(alpha);
 		camera.position.x = radius*Math.sin(alpha);
 		
@@ -1006,14 +1009,23 @@ body {
 		var rightLeg2 = scene.getObjectByName("rightLeg2", false);
 		rightLeg2.visible = rightLeg2Toggle.checked;
 	}
-	
-	// Change the username
-	document.getElementById('username').onkeypress = function(e){
+	// Change the uuid
+	document.getElementById('uuid').onkeypress = function(e){
 		if (!e) e = window.event;
 		var keyCode = e.keyCode || e.which;
 		if (keyCode == '13'){
 			// Enter pressed, set new image
-			img.src = 'https://crafatar.com/skins/' + document.getElementById('username').value;
+			
+			img.src = 'https://crafatar.com/skins/' + document.getElementById('uuid').value;
+		}
+	}
+	// Change the speed
+	document.getElementById('speed').onkeypress = function(e){
+		if (!e) e = window.event;
+		var keyCode = e.keyCode || e.which;
+		if (keyCode == '13'){
+			// Enter pressed, set new image
+			speed = document.getElementById('speed').value;
 		}
 	}
 </script>
